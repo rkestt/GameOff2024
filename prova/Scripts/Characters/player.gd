@@ -1,28 +1,39 @@
 extends CharacterBody2D
 
+#region Variables
+# * Character proprieters
+# * Movement
+@export var moveSpeed : int = 300
+@export var jumpVelocity = -300.0
+	#gravity
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+@export var gravityMultiplayer : float = 1.5;
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
-
-func _ready():
-	print("Bellaa");
+#endregion
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
+	movement(delta)
+
+func movement(delta) -> void:
+	# * Manage gravity
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		velocity.y += (gravity*gravityMultiplayer) * delta
 
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	# * Handle jump.
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = jumpVelocity
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("move_left", "move_right") #mhanz
+	# * Output Horizontal Movement
+	var direction := Input.get_axis("move_left", "move_right")
 	if direction:
-		velocity.x = direction * SPEED
+		velocity.x = direction * moveSpeed
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-
-	move_and_slide();
-#mhanz
+		velocity.x = 0
+	
+	move_and_slide()
+	# * Rotate sprite
+	if direction > 0:
+		$AnimatedSprite2D.flip_h = false
+	elif direction < 0:
+		$AnimatedSprite2D.flip_h = true
+	
