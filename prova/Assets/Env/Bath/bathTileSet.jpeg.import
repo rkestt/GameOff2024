@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcyiupbijk016"
-path="res://.godot/imported/Sprite-0001-Sheet.png-48ee13a826b207b468b4bd94a41083df.ctex"
+uid="uid://dts7c2pcal7tx"
+path="res://.godot/imported/bathTileSet.jpeg-7ddb1d9ad3934e28c86fbc9e202b772c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprite-0001-Sheet.png"
-dest_files=["res://.godot/imported/Sprite-0001-Sheet.png-48ee13a826b207b468b4bd94a41083df.ctex"]
+source_file="res://Assets/Env/Bath/bathTileSet.jpeg"
+dest_files=["res://.godot/imported/bathTileSet.jpeg-7ddb1d9ad3934e28c86fbc9e202b772c.ctex"]
 
 [params]
 
