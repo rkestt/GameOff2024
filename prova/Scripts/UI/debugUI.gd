@@ -4,22 +4,32 @@ extends PanelContainer
 #* Container
 @onready var propertyContainer = $MarginContainer/VBoxContainer
 var property
+
 #* Things to add
 @export var fpsCounter : String
 
 #Ready 
 func _ready() -> void:
-	addDebugProp("FPS: ", fpsCounter)
+	#Set global reference
+	Global.debug = self;
+
 #Update it
 func _process(delta: float) -> void:
 	fpsCounter = "%.2f" % (1.0/delta)
-	property.text = property.name + ": " + fpsCounter
+	addProperty("FPS", fpsCounter,0)
+
 func _input(event) -> void:
 	if Input.is_action_pressed("debugPanel"):
 		isVisible = !isVisible
 
-func addDebugProp(title: String.value):
-	property = Label.new()
-	propertyContainer.add_child(property)
-	property.name = title
-	property.text = property.name + value
+func addProperty(title: String,value,order):
+	var target
+	target = propertyContainer.find_child(title,true,false) #Find specific label
+	if !target:
+		target = Label.new()
+		propertyContainer.add_child(target)
+		target.name = title
+		target.text = target.name + ": " + str(value)
+	elif visible:
+		target.text = title + ": " + str(value)
+		propertyContainer.move_child(target,order)
