@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://7kdousudq84q"]
+
+[ext_resource type="Script" path="res://Scenes/Camera/roomCamera.gd" id="1_6cwq7"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_uu2i8"]
+a = Vector2(576, -324)
+b = Vector2(-576, -324)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_sdytg"]
+a = Vector2(576, -324)
+b = Vector2(576, 324)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_x1m7u"]
+a = Vector2(-576, -324)
+b = Vector2(-576, 324)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_vwbtd"]
+a = Vector2(-576, 324)
+b = Vector2(576, 324)
+
+[node name="RoomCamera" type="Camera2D"]
+script = ExtResource("1_6cwq7")
+
+[node name="AreaTop" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShapeTop" type="CollisionShape2D" parent="AreaTop"]
+shape = SubResource("SegmentShape2D_uu2i8")
+one_way_collision_margin = 0.0
+debug_color = Color(1.13589e-05, 0.738428, 0.844407, 0.42)
+
+[node name="AreaRight" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShapeRight" type="CollisionShape2D" parent="AreaRight"]
+shape = SubResource("SegmentShape2D_sdytg")
+one_way_collision_margin = 0.0
+debug_color = Color(0.266473, 0.541892, 7.70092e-07, 0.42)
+
+[node name="AreaLeft" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShapeLeft" type="CollisionShape2D" parent="AreaLeft"]
+shape = SubResource("SegmentShape2D_x1m7u")
+one_way_collision_margin = 0.0
+debug_color = Color(0, 0.896528, 0.327379, 0.42)
+
+[node name="AreaBottom" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShapeBottom" type="CollisionShape2D" parent="AreaBottom"]
+shape = SubResource("SegmentShape2D_vwbtd")
+one_way_collision_margin = 0.0
+debug_color = Color(0.937255, 0.203922, 0.396078, 0.568627)
+
+[connection signal="body_entered" from="AreaTop" to="." method="_OnBodyEnteredTop"]
+[connection signal="body_entered" from="AreaRight" to="." method="_OnBodyEnteredRight"]
+[connection signal="body_entered" from="AreaLeft" to="." method="_OnBodyEnteredLeft"]
+[connection signal="body_entered" from="AreaBottom" to="." method="_OnBodyEnteredBottom"]

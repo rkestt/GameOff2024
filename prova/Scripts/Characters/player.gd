@@ -1,6 +1,10 @@
 extends CharacterBody2D
+
+class_name Player
 #region Variables
 # * Character proprieters
+	#Objects
+@onready var playerCamera
 	# Animated Sprite
 @onready var animatedSprite = $AnimatedSprite2D
 #* Movement
@@ -26,6 +30,9 @@ var isIdling
 var isRunning
 #endregion
 
+#region Ready Functions
+
+#endregion
 #region Update Functions
 func _process(delta: float) -> void:
 	#Add parameters to debug
