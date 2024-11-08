@@ -6,20 +6,25 @@ class_name RoomTransisionCamera
 var currentRoomPosition : Vector2 = Vector2.ZERO #Inizialize the start room
 @onready var cameraHorizontalMovement : int = get_viewport_rect().size.x - horizontalOffset
 @onready var cameraVerticalMovement : int = get_viewport_rect().size.y - verticalOffset
+	#Target
+@export var targetNode : Node2D = null
 	#! transition number
 @export var horizontalOffset : int = 10
 @export var verticalOffset : int = 10
-
+	#Offset of the world
+var originOffset : Vector2 = Vector2.ZERO
 #endregion
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	originOffset = targetNode.get_position()
+	set_position(originOffset)
 
 
 #region Update 
 func updateCameraPosition(direction: Vector2) -> void:
+	print("Posizione della camera " + str(global_position))
 	currentRoomPosition += direction
-	set_position(currentRoomPosition * Vector2(cameraHorizontalMovement, cameraVerticalMovement))
+	set_position(originOffset + currentRoomPosition * Vector2(cameraHorizontalMovement, cameraVerticalMovement))
 #endregion
 #region Signal for transition
 
