@@ -4,6 +4,7 @@ extends PanelContainer
 #* Container
 @onready var propertyContainer = $MarginContainer/VBoxContainer
 var property
+#* General
 
 #* Things to add
 @export var fpsCounter : String

@@ -84,3 +84,7 @@ func jump(delta) -> void:
 func getGravity() -> float:
 	return jumpGravity if velocity.y < 0.0 else fallGravity
 #endregion
+
+#region General
+
+#endregion
